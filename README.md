@@ -31,8 +31,25 @@ Open a terminal and run
 
 ```bash
   echo "sensor_id=t1; value=30" | nc -u -w1 127.0.0.1 3344
-  echo "sensor_id=t1; value=30" | nc -u -w1 127.0.0.1 3344
-  echo "sensor_id=t1; value=30" | nc -u -w1 127.0.0.1 3344
-  echo "sensor_id=t1; value=30" | nc -u -w1 127.0.0.1 3344
-  echo "sensor_id=t1; value=30" | nc -u -w1 127.0.0.1 3344
+  echo "sensor_id=t1; value=50" | nc -u -w1 127.0.0.1 3344
+  echo "sensor_id=h1; value=30" | nc -u -w1 127.0.0.1 3344
+  echo "sensor_id=h1; value=90" | nc -u -w1 127.0.0.1 3344
+  echo "sensor_id=r1; value=30" | nc -u -w1 127.0.0.1 3344
 ```
+
+You can change the thresholds in the config.yaml file:
+
+
+```yaml
+# monitoring-service/src/main/resources/config.yaml
+
+sensor:
+  temperature:
+    threshold: 35
+  humidity:
+    threshold: 50
+  msgTemplate:
+
+```
+
+then run the service again
