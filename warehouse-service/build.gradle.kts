@@ -15,7 +15,7 @@ dependencies {
     implementation("com.rabbitmq:amqp-client:5.20.0")
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation("com.google.code.gson:gson:2.8.9")
-
+    
 
 }
 
