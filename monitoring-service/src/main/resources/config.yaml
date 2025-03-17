@@ -1,0 +1,10 @@
+
+sensor:
+  temperature:
+    threshold: 35
+    alertCriticalMsg: Temperature of sensor %s has crossed the threshold %s , current value = %s
+  humidity:
+    threshold: 50
+    alertCriticalMsg: Humidity of sensor %s has crossed the threshold %s , current value = %s
+  msgTemplate:
+    noIdentifiableSensor: Error! we are not able to determine identifier of sensor %s
