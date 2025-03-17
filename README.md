@@ -1,24 +1,4 @@
 
-# Sensor monitoring system
-
-A simple monitoring system Using Kotlin and rabbitmq
-
-
-
-## Features
-
-- Uese Kotlin
-- Use kotlin coroutines Flow for handling reactivity
-- Uses rabbitmq for integration
-- Uses snakeyaml for handling config properites.
-- Uses strategy pattern for notification.
-- Use docker and docker compose to easily run the project.
-- Use gradle as build system.
-- Uses Junit for testing.
-- Uses regex to validate input message
-
-
-
 ## Run Locally
 
 Clone the project
@@ -53,3 +33,18 @@ sensor:
 ```
 
 then run the service again
+
+Please following console log messages on both services
+
+Monitoring service ALERT
+
+```bash
+monitoring-service-1  | [ALERT] [CRITICAL] Temperature of sensor t1 has crossed the threshold 35 , current value = 50 (2025-03-17T05:39:23.475Z)
+
+``` 
+
+Warehouse service Errors in messages format or port mismatching
+
+```bash
+warehouse-service-1  | Errors: Invalid sensor data format
+```
