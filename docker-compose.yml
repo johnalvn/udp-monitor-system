@@ -14,17 +14,36 @@ services:
       retries: 5
       start_period: 10s
 
-  # udp-service:
-  #   build: .  
-  #   container_name: udp-service
-  #   depends_on:
-  #     rabbitmq:
-  #       condition: service_healthy
-  #   environment:
-  #     UDP_PORT: 9999
-  #     RABBITMQ_HOST: rabbitmq
-  #     RABBITMQ_QUEUE: udp_messages
-  #     RABBITMQ_USER: user
-  #     RABBITMQ_PASS: password
-  #   ports:
-  #     - "9999:9999/udp"
+  warehouse-service:
+    build: ./warehouse-service
+    ports:
+      - "3344:3344/udp"
+      - "3355:3355/udp"
+    environment:
+      - JAVA_OPTS=-Xmx512m -Xms256m
+    # If you need to connect to other services like databases
+    # networks:
+    #   - app-network
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+    depends_on:
+      - rabbitmq
+
+  monitoring-service:
+    build: ./monitoring-service
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-Xmx512m -Xms256m
+    # If you need to connect to other services like databases
+    # networks:
+    #   - app-network
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+    depends_on:
+      - rabbitmq
+      - warehouse-service

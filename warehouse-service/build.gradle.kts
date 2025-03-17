@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.1.10"
+    application
 }
 
 group = "co.jedal.test"
@@ -24,4 +25,21 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(17)
+}
+
+application {
+    mainClass.set("co.jedal.test.MainKt")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "co.jedal.test.MainKt"
+    }
+    // Include runtime dependencies in JAR
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(sourceSets.main.get().output)
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
 }

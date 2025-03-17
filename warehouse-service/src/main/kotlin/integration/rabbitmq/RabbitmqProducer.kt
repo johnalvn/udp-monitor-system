@@ -8,7 +8,7 @@ class RabbitmqProducer {
 
     fun sendData(data: String) {
         val factory = ConnectionFactory().apply {
-            host = "localhost"
+            host = "rabbitmq"
             username = "user"
             password = "password"
         }

@@ -9,7 +9,7 @@ class Consumer {
 
     fun consumeFromExchange() {
         val factory = ConnectionFactory().apply {
-            host = "localhost"
+            host = "rabbitmq"
             username = "user"
             password = "password"
         }

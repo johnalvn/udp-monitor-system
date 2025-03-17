@@ -1,8 +1,10 @@
 package co.jedal.test.validator
 
-class CompositeValidator(private val validators: List<StringValidator>) {
+import co.jedal.test.monitor.sensor.dto.UdpMessage
 
-    fun validate(input: String): ValidationResult {
+class CompositeValidator(private val validators: List<UdpMessageValidator>) {
+
+    fun validate(input: UdpMessage): ValidationResult {
         val errors = mutableListOf<String>()
 
         for (validator in validators) {

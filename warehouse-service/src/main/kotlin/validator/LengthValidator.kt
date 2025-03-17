@@ -1,11 +1,13 @@
 package co.jedal.test.validator
 
+import co.jedal.test.monitor.sensor.dto.UdpMessage
+
 class LengthValidator(
     private val minLength: Int,
     private val maxLength: Int,
     override val errorMessage: String
-) : StringValidator {
-    override fun validate(input: String): Boolean {
-        return input.length in minLength..maxLength
+) : UdpMessageValidator {
+    override fun validate(input: UdpMessage): Boolean {
+        return input.content.trim().length in minLength..maxLength
     }
 }

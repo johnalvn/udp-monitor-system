@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "2.1.10"
+    application
+    id("org.gradle.java-library")
 }
 
 group = "co.jedal.test"
@@ -18,12 +20,29 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.10")
     testImplementation("org.mockito:mockito-core:5.14.2")
     testImplementation("org.mockito:mockito-junit-jupiter:5.14.2")
-
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(17)
+}
+
+application {
+    mainClass.set("co.jedal.test.MainKt")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "co.jedal.test.MainKt"
+    }
+    // Include runtime dependencies in JAR
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(sourceSets.main.get().output)
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
 }

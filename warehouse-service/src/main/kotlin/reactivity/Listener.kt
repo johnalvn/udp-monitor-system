@@ -21,7 +21,7 @@ class Listener {
             mergedFlow
                 .onEach { message ->
                     println("Listener on port ${message.listenerPort} received: '${message.content.trim()}' from ${message.senderAddress}:${message.senderPort}")
-                    if (SensorMsgPreValidators().execute(message.content.trim())){
+                    if (SensorMsgPreValidators().execute(message)){
                         println("message format passed")
                         message.content.let {
                             SensorMessageProcessor().process(message.content.trim())
