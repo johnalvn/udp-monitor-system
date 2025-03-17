@@ -1,5 +1,6 @@
 package co.jedal.test.integration.rabbitmq
 
+import co.jedal.test.config.ConfigManager
 import co.jedal.test.integration.handler.SensorRawMessageHandler
 import com.rabbitmq.client.ConnectionFactory
 import com.rabbitmq.client.DeliverCallback
@@ -9,9 +10,9 @@ class Consumer {
 
     fun consumeFromExchange() {
         val factory = ConnectionFactory().apply {
-            host = "rabbitmq"
-            username = "user"
-            password = "password"
+            host = ConfigManager.get("rabbitmq.host").toString()
+            username = ConfigManager.get("rabbitmq.user").toString()
+            password = ConfigManager.get("rabbitmq.password").toString()
         }
 
         val connection = factory.newConnection()

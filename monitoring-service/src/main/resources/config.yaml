@@ -8,3 +8,8 @@ sensor:
     alertCriticalMsg: Humidity of sensor %s has crossed the threshold %s , current value = %s
   msgTemplate:
     noIdentifiableSensor: Error! we are not able to determine identifier of sensor %s
+
+rabbitmq:
+  host: rabbitmq
+  user: user
+  password: password
